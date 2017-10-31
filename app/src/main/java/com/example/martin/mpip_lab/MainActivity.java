@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private static final int GET_TEXT_REQUEST = 1;
+    private static String CUSTOM_ACTION = "mk.ukim.finki.mpip.IMPLICIT_ACTION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(explicitIntent, GET_TEXT_REQUEST);
             }
         });
+
+        btn = (Button) findViewById(R.id.button2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent implicitIntent = new Intent();
+                implicitIntent.setAction(CUSTOM_ACTION);
+
+                if (implicitIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(implicitIntent);
+                }
+
+            }
+        });
+
+
     }
 
     @Override
