@@ -17,21 +17,31 @@ import io.reactivex.subjects.PublishSubject;
 
 public class SimpleRvAdapter extends RecyclerView.Adapter<SimpleRvAdapter.ViewHolder> {
     private String[] dataSource;
+    private static Context context;
 
     private final PublishSubject<String> onClickSubject = PublishSubject.create();
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mTextView;
 
         public ViewHolder(TextView itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             mTextView = itemView;
+        }
+
+        @Override
+        public void onClick(View view) {
+            String packageName = this.mTextView.getText().toString();
+            Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+            context.startActivity( LaunchIntent);
         }
     }
 
-    public SimpleRvAdapter(String[] dataArgs) {
-        dataSource = dataArgs;
+    public SimpleRvAdapter(String[] dataArgs, Context context) {
+        this.dataSource = dataArgs;
+        this.context = context;
     }
 
     @Override

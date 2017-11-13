@@ -41,7 +41,7 @@ public class ImplicitActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new SimpleRvAdapter(packageNames.toArray(new String[packageNames.size()]));
+        mAdapter = new SimpleRvAdapter(packageNames.toArray(new String[packageNames.size()]), getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
 
     }
